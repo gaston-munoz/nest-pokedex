@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PokemonService } from './pokemon.service';
-import { CreatePokemonDto } from './dto/create-pokemon.dto';
-import { UpdatePokemonDto } from './dto/update-pokemon.dto';
-import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id.pipe';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common'
+import { PokemonService } from './pokemon.service'
+import { CreatePokemonDto } from './dto/create-pokemon.dto'
+import { UpdatePokemonDto } from './dto/update-pokemon.dto'
+import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id.pipe'
+import { PaginationDto } from 'src/common/dto/pagination.dto'
 
 @Controller('pokemon')
 export class PokemonController {
@@ -11,26 +12,26 @@ export class PokemonController {
   @Post()
   create(@Body() createPokemonDto: CreatePokemonDto) {
     console.log(CreatePokemonDto)
-    return this.pokemonService.create(createPokemonDto);
+    return this.pokemonService.create(createPokemonDto)
   }
 
   @Get()
-  findAll() {
-    return this.pokemonService.findAll();
+  findAll(@Query() paginationDto: PaginationDto) {
+    return this.pokemonService.findAll(paginationDto)
   }
 
   @Get(':search')
   findOne(@Param('search') search: string) {
-    return this.pokemonService.findOne(search);
+    return this.pokemonService.findOne(search)
   }
 
   @Patch(':search')
   update(@Param('search') search: string, @Body() updatePokemonDto: UpdatePokemonDto) {
-    return this.pokemonService.update(search, updatePokemonDto);
+    return this.pokemonService.update(search, updatePokemonDto)
   }
 
   @Delete(':id')
   remove(@Param('id', ParseMongoIdPipe) id: string) {
-    return this.pokemonService.remove(id);
+    return this.pokemonService.remove(id)
   }
 }
