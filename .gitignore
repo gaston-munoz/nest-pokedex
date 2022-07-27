@@ -39,3 +39,4 @@ mongo
 
 ## ENV
 .env
+.env.prod
