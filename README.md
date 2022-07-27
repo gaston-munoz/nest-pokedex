@@ -13,11 +13,12 @@
 ## Installation
 
 - Download the proyect
-- Install dependencies
+- Install dependencies running
 ```
 $ yarn install
 ```
-- Install Docker
+
+- Create __.env__ file with __.env.template__ model
 
 ## Running the app
 - Up DB
